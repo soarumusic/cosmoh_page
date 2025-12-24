@@ -1,96 +1,70 @@
 /* main.css - 기본 색상, 타이포그래피, 공통 요소 */
 
 :root {
-  --primary: #4F46E5;
-  --secondary: #9333EA;
-  --background: #0A0F1A;
-  --text: #E5E7EB;
-  --neon-purple: #bf00ff;
-  --glass-bg: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-hover-bg: rgba(255, 255, 255, 0.15);
-  --glass-hover-border: rgba(79, 70, 229, 0.4);
-  --glass-shadow: rgba(79, 70, 229, 0.2);
+  /* Premium Noir Palette */
+  --primary: #ffffff;
+  --secondary: #94a3b8;
+  --accent: #3b82f6;
+  --background: #050505;
+  --surface: #0f0f0f;
+  --text: #ececec;
+  --text-muted: #a1a1aa;
+
+  /* Glassmorphism - Frosted */
+  --glass-bg: rgba(20, 20, 20, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-hover-bg: rgba(30, 30, 30, 0.7);
+  --glass-hover-border: rgba(255, 255, 255, 0.15);
+  --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
   --container-max-width: 1200px;
   --header-height: 80px;
 }
 
 /* 기본 스타일 */
 body {
-  font-family: 'Do Hyeon', sans-serif;
-  background: linear-gradient(135deg, #0A0F1A 0%, #101624 100%);
-  background-size: cover;
-  background-attachment: fixed;
+  font-family: 'Inter', sans-serif;
+  background: #050505;
   color: var(--text);
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  font-size: 18px;
+  font-size: 16px;
+  line-height: 1.6;
   position: relative;
   padding-bottom: 100px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  scroll-snap-type: y none;
 }
 
-/* 언어별 폰트 설정 */
-body.lang-ko {
-  font-family: 'Do Hyeon', sans-serif;
-  font-size: 18px;
+/* Typography Overrides */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #ffffff;
 }
 
-body.lang-en {
-  font-family: 'Inter', sans-serif;
-  font-size: 18px;
-}
-
+/* Remove old language specific font overrides for cleaner look */
+body.lang-ko,
+body.lang-en,
 body.lang-ja {
-  font-family: 'M PLUS Rounded 1c', sans-serif;
-  font-size: 18px;
-}
-
-#about.lang-ko p, 
-body.lang-ko #about .glass-card p {
-  font-family: 'Nanum Gothic', sans-serif;
-}
-
-/* 헤딩 스타일 */
-h1, h2, h3 {
-  font-family: 'Poppins', sans-serif;
-}
-
-/* COSMOH music 로고 폰트 설정 */
-.logo {
-  font-family: 'Gugi', serif !important;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.cosmoh-title {
-  font-family: 'Gugi', serif !important;
-  font-weight: 400;
-  font-style: normal;
-}
-
-/* 언어별 헤더 폰트 설정 */
-body.lang-ko h1:not(.cosmoh-title), 
-body.lang-ko h2:not(.cosmoh-title), 
-body.lang-ko h3:not(.cosmoh-title) {
-  font-family: 'Do Hyeon', sans-serif;
-}
-
-body.lang-en h1:not(.cosmoh-title), 
-body.lang-en h2:not(.cosmoh-title), 
-body.lang-en h3:not(.cosmoh-title) {
   font-family: 'Inter', sans-serif;
 }
 
-body.lang-ja h1:not(.cosmoh-title), 
-body.lang-ja h2:not(.cosmoh-title), 
-body.lang-ja h3:not(.cosmoh-title) {
-  font-family: 'M PLUS Rounded 1c', sans-serif;
+.logo,
+.soaru-title {
+  font-family: 'Outfit', sans-serif !important;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
 }
 
 /* 기본 컨테이너 */
@@ -102,22 +76,27 @@ body.lang-ja h3:not(.cosmoh-title) {
 
 /* 버튼 스타일 */
 .btn {
-  display: inline-block;
-  background-color: var(--primary);
-  color: white;
-  padding: 14px 28px;
-  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 6px;
   text-decoration: none;
-  font-weight: bold;
-  transition: transform 0.3s, box-shadow 0.3s;
-  border: none;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 16px;
+  letter-spacing: 0.02em;
 }
 
 .btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
 }
 
 .btn.loading {
@@ -127,42 +106,36 @@ body.lang-ja h3:not(.cosmoh-title) {
 
 /* 포트폴리오 버튼 스타일 개선 */
 .portfolio-btn {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: white;
-  padding: 16px 32px;
-  border-radius: 12px;
-  font-size: 21px;
-  font-weight: bold;
-  letter-spacing: 0.5px;
+  background: white;
+  color: black;
+  padding: 14px 32px;
+  border-radius: 100px;
+  /* Pillow shape for high contrast */
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 6px 15px rgba(79, 70, 229, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  border: none;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   z-index: 1;
 }
 
 .portfolio-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, var(--secondary), var(--primary));
-  opacity: 0;
-  z-index: -1;
-  transition: opacity 0.4s ease;
+  display: none;
+  /* Remove gradient overlay */
 }
 
 .portfolio-btn:hover {
-  transform: translateY(-5px) scale(1.03);
-  box-shadow: 0 15px 25px rgba(79, 70, 229, 0.5);
-  letter-spacing: 0.8px;
+  transform: scale(1.02);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+  letter-spacing: 0;
+  background: #f0f0f0;
 }
 
 .portfolio-btn:hover::before {
-  opacity: 1;
+  opacity: 0;
 }
 
 .portfolio-btn:active {
@@ -172,18 +145,21 @@ body.lang-ja h3:not(.cosmoh-title) {
 
 /* 글래스 카드 스타일 */
 .glass-card {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 10px;
-  padding: 35px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 12px;
+  padding: 40px;
   margin: 25px 0;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
+  border: 1px solid var(--glass-border);
+  transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
 }
 
 .glass-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(79, 70, 229, 0.2);
+  transform: translateY(-2px);
+  background: var(--glass-hover-bg);
+  border-color: var(--glass-hover-border);
+  box-shadow: var(--glass-shadow);
 }
 
 /* 섹션 제목 스타일 */
@@ -200,11 +176,11 @@ body.lang-ja h3:not(.cosmoh-title) {
 .section-title::after {
   content: '';
   position: absolute;
-  bottom: -10px;
+  bottom: -15px;
   left: 0;
-  width: 120px;
-  height: 4px;
-  background: linear-gradient(90deg, #4F46E5, #9333EA);
+  width: 40px;
+  height: 2px;
+  background: var(--accent);
   left: 50%;
   transform: translateX(-50%);
 }
@@ -225,9 +201,9 @@ body.lang-ja h3:not(.cosmoh-title) {
   position: absolute;
   bottom: -15px;
   left: 0;
-  width: 100px;
-  height: 3px;
-  background: linear-gradient(90deg, #4F46E5, #9333EA);
+  width: 60px;
+  height: 2px;
+  background: var(--accent);
   left: 50%;
   transform: translateX(-50%);
 }
@@ -265,40 +241,45 @@ body.lang-ja h3:not(.cosmoh-title) {
 
 /* 장르 태그 */
 .genre-tag {
-  display: inline-block;
-  background: linear-gradient(135deg, rgba(191, 0, 255, 0.3), rgba(147, 51, 234, 0.3));
-  color: white;
-  padding: 8px 18px;
-  border-radius: 20px;
-  font-size: 16px;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  border: 1px solid rgba(191, 0, 255, 0.5);
-  box-shadow: 0 0 10px rgba(191, 0, 255, 0.5), 
-              inset 0 0 8px rgba(191, 0, 255, 0.3);
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  background: transparent;
+  color: var(--text-muted);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+  text-shadow: none;
+  transition: all 0.2s ease;
 }
 
 .genre-tag:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 15px rgba(191, 0, 255, 0.7), 
-             inset 0 0 12px rgba(191, 0, 255, 0.5);
+  transform: none;
+  border-color: var(--accent);
+  color: #fff;
+  background: rgba(59, 130, 246, 0.1);
+  box-shadow: none;
 }
 
 /* 기술 태그 */
 .skill-tag {
-  background: rgba(79, 70, 229, 0.2);
-  padding: 10px 18px;
-  border-radius: 20px;
-  font-size: 16px;
-  transition: transform 0.3s;
-  border: 1px solid rgba(79, 70, 229, 0.3);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 15px;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .skill-tag:hover {
-  transform: translateY(-3px);
-  background: rgba(79, 70, 229, 0.3);
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 /* 스킬 리스트 */

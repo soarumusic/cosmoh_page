@@ -1,6 +1,7 @@
 /* components.css - 컴포넌트 스타일 */
 
 /* 비디오 카드 */
+/* 비디오 카드 */
 .video-card {
   display: flex;
   flex-direction: column;
@@ -8,45 +9,43 @@
 }
 
 .video-container {
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  transform: scale(0.95);
-  position: relative;
-  z-index: 1;
-  background: rgba(20, 20, 35, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s ease;
+  transform: none;
+  background: var(--surface);
+  border: 1px solid var(--glass-border);
 }
 
 .video-container:hover {
-  transform: scale(1);
-  box-shadow: 0 15px 30px rgba(79, 70, 229, 0.4);
-  z-index: 2;
-  border-color: rgba(79, 70, 229, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  border-color: var(--glass-hover-border);
 }
 
 .video-info {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 0 0 12px 12px;
-  padding: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-top: none;
+  background: var(--surface);
+  border-radius: 0 0 8px 8px;
+  padding: 20px;
+  border-top: 1px solid var(--glass-border);
   transition: all 0.3s ease;
-  text-align: center;
+  text-align: left;
+  /* More professional alignment */
 }
 
 .video-container:hover .video-info {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(79, 70, 229, 0.4);
+  background: var(--surface);
+  border-color: var(--glass-hover-border);
 }
 
 .video-info h3 {
   margin-top: 0;
-  margin-bottom: 10px;
-  font-size: 20px;
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: 600;
   color: white;
-  text-align: center;
+  text-align: left;
 }
 
 iframe {
@@ -56,17 +55,21 @@ iframe {
 }
 
 /* 오디오 카드 */
+/* 오디오 카드 */
 .audio-card {
-  background: rgba(20, 20, 35, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  border-radius: 16px;
-  transition: transform 0.3s, box-shadow 0.3s;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 12px;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
 }
 
 .audio-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 30px rgba(79, 70, 229, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  /* removed purple shadow */
+  border-color: var(--glass-hover-border);
 }
 
 .audio-card-content {
@@ -110,9 +113,10 @@ iframe {
 
 .audio-info h3 {
   margin-top: 0;
-  margin-bottom: 10px;
-  font-size: 22px;
+  margin-bottom: 8px;
+  font-size: 18px;
   color: white;
+  font-weight: 600;
 }
 
 .audio-info p {
@@ -131,48 +135,59 @@ iframe {
 }
 
 /* 폼 컴포넌트 */
+/* 폼 컴포넌트 */
 .form-group label {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 14px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .form-group input,
 .form-group textarea,
 .form-group select {
   width: 100%;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+  padding: 14px;
+  background: var(--surface);
+  border: 1px solid var(--glass-border);
+  border-radius: 6px;
   color: var(--text);
   font-size: 16px;
-  transition: border-color 0.3s, box-shadow 0.3s;
-  box-sizing: border-box; /* 추가: 패딩을 너비에 포함 */
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
 }
 
 .form-group select {
-  color: white;
+  color: var(--text);
   appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
 }
 
 .form-group select option {
-  color: black;
-  background-color: white;
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
 }
 
 .form-group select option:checked {
-  color: white;
   background-color: var(--secondary);
+  color: #fff;
 }
 
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
   outline: none;
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .form-group textarea {

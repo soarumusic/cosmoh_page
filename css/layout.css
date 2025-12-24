@@ -1,62 +1,45 @@
 /* layout.css - 레이아웃, 배치 관련 스타일 */
 
 /* 헤더 및 네비게이션 */
+/* 헤더 및 네비게이션 */
+/* Header & Language - Minimal */
 header {
   padding: 20px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  position: fixed;
+  position: absolute;
+  /* Changed from fixed to absolute or remove background */
   top: 0;
-  background: rgba(10, 15, 26, 0.95);
-  backdrop-filter: blur(10px);
-  z-index: 100;
   width: 100%;
+  z-index: 100;
+  background: transparent;
+  border-bottom: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  pointer-events: none;
+  /* Allow clicking through header area */
 }
 
+/* Remove nav styles that might block interaction */
 nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: block;
 }
 
 .nav-container {
   display: flex;
+  justify-content: flex-end;
+  /* Align to right since logo is gone */
   align-items: center;
+  padding: 0 40px;
 }
 
 .logo {
-  font-size: 28px;
-  font-weight: bold;
-  background: linear-gradient(90deg, #4F46E5, #9333EA);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.nav-links {
-  display: flex;
-  gap: 30px;
-  position: relative; /* 인디케이터의 부모 요소 */
-}
-
-.nav-links a {
-  color: var(--text);
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
   text-decoration: none;
-  opacity: 0.8;
-  transition: opacity 0.2s;
-  font-weight: 500;
-  cursor: pointer;
-  font-size: 20px;
-  position: relative; /* 위치 기준 */
-  padding: 5px 0; /* 상하 패딩 */
+  z-index: 101;
 }
 
-.nav-links a:hover {
-  opacity: 1;
-}
-
-.nav-links a.active {
-  opacity: 1;
-  position: relative;
-}
+/* Old Nav Removed */
 
 /* 언어 선택기 */
 .language-selector {
@@ -86,6 +69,112 @@ nav {
   color: black;
 }
 
+.language-selector-fixed {
+  position: fixed;
+  /* Fix to viewport */
+  top: 30px;
+  right: 40px;
+  z-index: 1000;
+  /* High z-index */
+  pointer-events: auto;
+  /* Re-enable pointer events for specific element */
+}
+
+.language-selector-fixed select {
+  background: rgba(0, 0, 0, 0.5);
+  /* Darker background for visibility */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  padding: 8px 30px 8px 36px;
+  border-radius: 20px;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: all 0.3s ease;
+}
+
+.language-selector-fixed select:hover {
+  background: rgba(0, 0, 0, 0.8);
+  border-color: #fff;
+}
+
+/* Ensure options are visible */
+.language-selector-fixed select option {
+  background-color: #222;
+  color: #fff;
+  padding: 10px;
+}
+
+.language-selector-fixed .language-flag {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  pointer-events: none;
+  z-index: 10;
+  /* Bring above the select element's backdrop filter */
+}
+
+/* Side Dot Navigation */
+#side-nav {
+  position: fixed;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 100;
+}
+
+.nav-dot {
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-dot:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: scale(1.2);
+}
+
+.nav-dot.active {
+  background: #fff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  transform: scale(1.3);
+}
+
+/* Tooltips */
+.nav-dot::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #fff;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.nav-dot:hover::before {
+  opacity: 1;
+  visibility: visible;
+  right: 30px;
+  /* Slight slide in */
+}
+
 .language-selector::after {
   content: '▼';
   font-size: 10px;
@@ -109,6 +198,7 @@ nav {
 /* 섹션 기본 레이아웃 - 스크롤 스냅 제거 */
 .section {
   padding-top: 100px;
+  /* This was likely causing the offset if applied to hero */
   padding-bottom: 50px;
   min-height: auto;
   transition: opacity 0.5s ease, transform 0.5s ease;
@@ -133,42 +223,371 @@ nav {
 }
 
 /* 홈 섹션 */
-#home {
-  min-height: 90vh;
-  padding: 100px 0 50px;
-  display: none;
-}
-
-#home.active {
-  display: flex;
+/* Hero Section - Cinematic */
+.hero-section {
+  height: 100vh;
+  /* Fallback */
+  height: 100dvh;
+  /* Mobile override */
+  display: flex !important;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  position: relative;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden;
+  top: 0;
 }
 
-#home .container {
-  margin-top: 50px;
+.hero-content {
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 30vh;
+  /* Increased to 30vh as requested */
+}
+
+.soaru-title {
+  font-size: clamp(60px, 15vw, 180px);
+  /* Huge fluid typography */
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  font-weight: 800;
+  margin: 0;
+  background: linear-gradient(to bottom, #fff 0%, #aaa 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.hero-subtitle {
+  font-size: clamp(20px, 4vw, 32px);
+  font-weight: 300;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: -10px;
+}
+
+.hero-desc {
+  margin-top: 40px;
+  max-width: 600px;
+  line-height: 1.8;
+  color: var(--text);
+  font-size: 18px;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0.5;
+}
+
+.scroll-indicator .line {
+  width: 1px;
+  height: 60px;
+  background: var(--text-muted);
+}
+
+.scroll-text {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Cinematic Stream Layout */
+.stream-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 100px 20px;
+}
+
+.section-subtitle-text {
+  text-align: center;
+  color: var(--text-muted);
+  margin-bottom: 80px;
+  margin-top: 10px;
+  /* Increased spacing from -20px to 10px */
+  font-size: 18px;
+}
+
+.stream-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Changed from space-between to center to prevent small items from sticking to edges */
+  gap: 60px;
+  margin-bottom: 200px;
+  /* Huge spacing for cinematic feel */
+  min-height: 60vh;
+}
+
+.stream-item.reverse {
+  flex-direction: row-reverse;
+}
+
+.stream-item.compact {
+  min-height: auto;
+  margin-bottom: 100px;
+}
+
+/* Prevent text from stretching too wide in compact mode, pulling it to center */
+.stream-item.compact .stream-content {
+  flex: 0 1 450px;
+  /* Match the visual width roughly */
+}
+
+.stream-visual {
+  flex: 1;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.stream-visual.audio-visual {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 450px;
+  /* Match typical video preview size */
+  margin: 0 auto;
+  /* Center in its side */
+}
+
+.stream-album-art {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1/1;
+  /* Changed to square as requested */
+  object-fit: cover;
+  display: block;
+}
+
+.audio-player-clean {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.stream-content {
+  flex: 0.8;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.stream-number {
+  font-size: 80px;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.03);
+  line-height: 1;
+  margin-bottom: -20px;
+  margin-left: -5px;
+}
+
+.stream-content h3,
+.stream-content h4 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.stream-desc {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-muted);
+  margin-top: 20px;
+}
+
+.stream-break {
+  text-align: center;
+  margin: 150px 0 100px;
+  position: relative;
+}
+
+.break-title {
+  font-size: 24px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+.break-title::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 60px;
+  background: var(--glass-border);
+  margin: 20px auto 0;
+}
+
+.glass-card-clean {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Genres Pill Style */
+.genre-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.genre-pill {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 6px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 100px;
+  color: var(--text-muted);
+}
+
+/* About - Centered */
+.container-narrow {
+  max-width: 800px;
+  margin: 0 auto;
   text-align: center;
 }
 
-#home h1 {
-  font-size: 56px;
-  margin-top: 20px;
+/* Fix for section title alignment inside centered container */
+.container-narrow .section-title {
+  left: auto;
+  transform: none;
+}
+
+.about-hero {
+  margin-bottom: 60px;
+}
+
+.profile-img-large {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 30px;
+  filter: grayscale(100%);
+  transition: all 0.5s ease;
+}
+
+.profile-img-large:hover {
+  filter: grayscale(0%);
+}
+
+.lead-text {
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 1.4;
+  margin-bottom: 40px;
+  color: #fff;
+}
+
+.skills-minimal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 60px;
+  color: var(--text-muted);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.separator {
+  color: rgba(255, 255, 255, 0.1);
+}
+
+.social-minimal {
+  margin-top: 80px;
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+}
+
+.social-link-text {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+
+.social-link-text:hover {
+  opacity: 1;
+}
+
+/* Form Minimal */
+.glass-form-container {
+  margin-top: 60px;
+}
+
+.contact-form-minimal input,
+.contact-form-minimal select,
+.contact-form-minimal textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px 0;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 0;
+  font-family: inherit;
+}
+
+.contact-form-minimal input:focus,
+.contact-form-minimal select:focus,
+.contact-form-minimal textarea:focus {
+  outline: none;
+  border-bottom-color: #fff;
+}
+
+.contact-form-minimal select option {
+  background-color: #111;
+  /* Dark background */
+  color: #fff;
+  /* White text */
+  padding: 10px;
+}
+
+.form-row {
+  display: flex;
+  gap: 40px;
+}
+
+.form-group-minimal {
+  flex: 1;
   margin-bottom: 20px;
-  background: linear-gradient(90deg, #4F46E5, #9333EA);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
-#home h2 {
-  font-size: 32px;
+.btn-minimal-submit {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 20px 60px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-top: 40px;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 
-#home p {
-  font-size: 22px;
-  max-width: 700px;
-  margin: 0 auto 40px;
-  opacity: 0.8;
+.btn-minimal-submit:hover {
+  background: #fff;
+  color: #000;
 }
 
 /* 포트폴리오 섹션 레이아웃 */
@@ -200,7 +619,8 @@ nav {
 
 /* 소개 섹션 텍스트 정렬 */
 #about .glass-card p {
-  text-align: left;
+  text-align: center;
+  /* Changed from left to center as requested */
   font-size: 20px;
 }
 
@@ -229,7 +649,8 @@ nav {
 
 .form-group {
   margin-bottom: 25px;
-  text-align: left;
+  text-align: center;
+  /* Changed from left to center as requested */
 }
 
 .form-submit-container {
@@ -270,50 +691,45 @@ nav {
   top: -20px;
   left: 50%;
   transform: translateX(-50%);
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(135deg, #4F46E5, #9333EA);
+  width: 40px;
+  height: 40px;
+  background: #000;
+  border: 1px solid var(--accent);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
-  color: white;
+  font-weight: 600;
+  color: #fff;
   z-index: 1;
-  font-size: 22px;
+  font-size: 16px;
 }
 
 /* 스크롤 관련 설정 수정 */
 html {
-  scroll-behavior: smooth; /* 부드러운 스크롤 유지 */
+  scroll-behavior: smooth;
+  /* 부드러운 스크롤 유지 */
   height: 100%;
   overflow-x: hidden;
 }
 
 body {
   min-height: 100%;
-  scroll-snap-type: none; /* 스크롤 스냅 비활성화 */
+  scroll-snap-type: none;
+  /* 스크롤 스냅 비활성화 */
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
 }
 
-.section, #home {
-  scroll-snap-align: none; /* 스크롤 스냅 정렬 비활성화 */
+.section,
+#home {
+  scroll-snap-align: none;
+  /* 스크롤 스냅 정렬 비활성화 */
   flex: 0 0 auto;
 }
 
-/* 사이드 스크롤 인디케이터 */
-#side-scroll-indicator {
-  position: fixed;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  z-index: 200;
-}
+
 
 /* 푸터 수정 */
 footer {
